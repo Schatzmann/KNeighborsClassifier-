@@ -1,0 +1,67 @@
+#Autor:
+#Annelyse Schatzmann           GRR20151731
+
+
+
+		Size 		Color 	Shape 		Label
+L1	big 		red 		circle 			No									
+L2	small		red 		triangle 		No
+L3	small		red 		circle 			Yes
+L4 	big 		blue 		circle 			No
+L5	small		blue 		circle 			Yes
+
+
+5) Com relação aos algoritmos de Concept Learning e o conceito apresentado abaixo
+5.1) Execute o algoritmo Find-S e apresente a hipótese gerada.
+
+	Find-S começa com a hipótese mais específica
+	 	h0 = [*, *, *]
+	Troca a restrição para uma mais geral - Só considera os POSITIVOS (L1 e L2 não entram)
+		h1 = [small, red, circle]
+	Troca para o próximo exemplo positivo (considerando os iguais e colocando ? para os diferentes)
+		h2 = [small, ?, circle]	
+
+RESPOSTA: h2 = [small, ?, circle]	
+
+5.2) Execute o algoritmo Eliminate Candidate e apresente o Espaço Versão gerado.
+
+	1)Delimitar o espaço de hipóteses
+		S0 = [*, *, *]
+		G0 = [?, ?, ?]
+	2)Olhar para L1, como é NEGATIVA, S continua igual e muda o G (olha os parâmetros diferentes de L1).
+		S0, S1 = [*, *, *]
+		G1 = [small, ?, ?] [?, blue, ?] [?, ?, triangle]
+	3)Olha para L2, como é NEGATIVA segue regra acima (para G2: compara G1 com L2)
+		S0, S1, S2 = [*, *, *]
+		G2 = [small, blue, ?][small, ?, circle][?, blue, ?] [big, ?, triangle] [?, blue, triangle]
+		-> se o parâmetro é igual repete e coloca novos diferente de L2, se o parâmetro é diferente entre G1 e L2, apenas repete.
+	4)Olha para L3, como é POSITIVA, muda o S e consequentemente o G
+		S3 = [small, red, circle]
+		G3 = [small, ?, circle]  (compara G2 com S3 para ver quais parâmetros que "encaixam")
+	5)Olha para L4, como é NEGATIVA muda-se o G, como a L4 não tem nenhum parâmetro que se encaixa em S3,o G continua igual
+		S3,S4 = [small, red, circle]
+		G3,G4 = [small, ?, circle]
+	6)Olha para L5, como é POSITIVA, muda o S (olha para L5 e compara com S4)
+		S5 = [small, ?, circle]
+		G4 = [small, ?, circle]
+
+-> CONVERGIRAM PARA UMA SOLUÇÃO EM COMUM
+
+
+
+																		S0, S1, S2 = [*, *, *]
+																							|
+																S3, S4 = [small, red, circle]
+																							|
+																		S5 = [small, ?, circle]
+
+
+																		G4 = [small, ?, circle]
+																							|
+																		G3 = [small, ?, circle]
+																							|
+	G2 = [small, blue, ?][small, ?, circle][?, blue, ?] [big, ?, triangle] [?, blue, triangle]
+																							|
+												G1 = [small, ?, ?] [?, blue, ?] [?, ?, triangle]
+																							|
+																				G0 = [?, ?, ?]
