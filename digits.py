@@ -9,7 +9,7 @@ import os
 import numpy as np
 import random
 
-def load_images(path_images, fout):
+def load_images(path_images, fout, X, Y):
 	print ('Loading images...')
 	archives = os.listdir(path_images)
 	images = []
@@ -25,7 +25,7 @@ def load_images(path_images, fout):
 		for archive in archives:
 			if archive == image_name:
 				image = cv2.imread(path_images +'/'+ archive, 0)
-				rawpixel(image, label[0], fout)
+				rawpixel(image, label[0], fout, X, Y)
 				
 				#images.append((image, label))
 
@@ -37,11 +37,11 @@ def load_images(path_images, fout):
 #
 #########################################################
 	
-def rawpixel(image, label, fout):
+def rawpixel(image, label, fout, X, Y):
 	
-	## novas dimensoes
-	X= 20
-	Y= 10
+	# ## novas dimensoes
+	# X= 20
+	# Y= 10
 	
 	image = cv2.resize(image, (X,Y) )
 	#cv2.imshow("image", image )
